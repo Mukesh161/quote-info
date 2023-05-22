@@ -1,4 +1,4 @@
-package com.cts.model;
+package com.cts.entity;
 
 import java.util.Date;
 
