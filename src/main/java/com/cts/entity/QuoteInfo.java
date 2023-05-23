@@ -1,14 +1,13 @@
 package com.cts.entity;
 
-import java.util.Date;
-
 public class QuoteInfo {
 
+	private int systemId;
 	private String memberCounty;
 	private String entityType;
 	private String firstName;
 	private String lastName;
-	private Date dob;
+	private String dob;
 	private int ssn;
 	private String address1;
 	private String address2;
@@ -23,7 +22,36 @@ public class QuoteInfo {
 	public QuoteInfo() {
 	}
 
-	public QuoteInfo(String memberCounty, String entityType, String firstName, String lastName, Date dob, int ssn,
+	public QuoteInfo(String quoteStatus, String lobInterested, String premiumRange) {
+		super();
+		this.quoteStatus = quoteStatus;
+		this.lobInterested = lobInterested;
+		this.premiumRange = premiumRange;
+	}
+
+	public QuoteInfo(int systemId, String memberCounty, String entityType, String firstName, String lastName,
+			String dob, int ssn, String address1, String address2, String county, int primaryPhone, int secondaryPhone,
+			String emailAddress, String quoteStatus, String lobInterested, String premiumRange) {
+		super();
+		this.systemId = systemId;
+		this.memberCounty = memberCounty;
+		this.entityType = entityType;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.dob = dob;
+		this.ssn = ssn;
+		this.address1 = address1;
+		this.address2 = address2;
+		this.county = county;
+		this.primaryPhone = primaryPhone;
+		this.secondaryPhone = secondaryPhone;
+		this.emailAddress = emailAddress;
+		this.quoteStatus = quoteStatus;
+		this.lobInterested = lobInterested;
+		this.premiumRange = premiumRange;
+	}
+
+	public QuoteInfo(String memberCounty, String entityType, String firstName, String lastName, String dob, int ssn,
 			String address1, String address2, String county, int primaryPhone, int secondaryPhone, String emailAddress,
 			String quoteStatus, String lobInterested, String premiumRange) {
 		super();
@@ -42,6 +70,14 @@ public class QuoteInfo {
 		this.quoteStatus = quoteStatus;
 		this.lobInterested = lobInterested;
 		this.premiumRange = premiumRange;
+	}
+
+	public int getSystemId() {
+		return systemId;
+	}
+
+	public void setSystemId(int systemId) {
+		this.systemId = systemId;
 	}
 
 	public String getMemberCounty() {
@@ -76,11 +112,11 @@ public class QuoteInfo {
 		this.lastName = lastName;
 	}
 
-	public Date getDob() {
+	public String getDob() {
 		return dob;
 	}
 
-	public void setDob(Date dob) {
+	public void setDob(String dob) {
 		this.dob = dob;
 	}
 
