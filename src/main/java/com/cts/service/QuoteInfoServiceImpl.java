@@ -8,7 +8,7 @@ import com.cts.entity.QuoteInfo;
 
 @Service
 public class QuoteInfoServiceImpl implements QuoteInfoService {
-	
+
 	@Autowired
 	private QuoteInfoDAO dao;
 
