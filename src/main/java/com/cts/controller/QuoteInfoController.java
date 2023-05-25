@@ -1,5 +1,9 @@
 package com.cts.controller;
 
+import java.util.Date;
+import java.util.Objects;
+import java.util.stream.Stream;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cts.entity.ExceptionResponse;
 import com.cts.entity.QuoteInfo;
 import com.cts.exceptions.InvalidInfo;
 import com.cts.exceptions.SsnNotFound;
@@ -25,11 +30,15 @@ public class QuoteInfoController {
 
 	@PostMapping("/submitUW")
 	public ResponseEntity<String> create(@RequestBody QuoteInfo quoteInfo) throws InvalidInfo {
-		try {
-			quoteInfoService.create(quoteInfo);
-			return new ResponseEntity<String>("Quote created", HttpStatus.OK);
-		} catch (Exception e) {
-			throw new InvalidInfo();
+		if (! Stream.of(quoteInfo.getMemberCounty()).allMatch(Objects::isNull)) {
+			try {
+				quoteInfoService.create(quoteInfo);
+				return new ResponseEntity<String>("Quote created", HttpStatus.OK);
+			} catch (Exception e) {
+				throw new InvalidInfo("Invalid data passed");
+			}
+		} else {
+			throw new InvalidInfo("Invalid data passed");
 		}
 	}
 
@@ -43,12 +52,14 @@ public class QuoteInfoController {
 	}
 
 	@ExceptionHandler(SsnNotFound.class)
-	public ResponseEntity<?> handleSsnNotFound(SsnNotFound e) {
-		return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+	public ResponseEntity<ExceptionResponse> handleSsnNotFound(SsnNotFound e) {
+		ExceptionResponse exceptionResponse = new ExceptionResponse(e.getMessage(), new Date());
+		return new ResponseEntity<ExceptionResponse>(exceptionResponse, HttpStatus.NOT_FOUND);
 	}
 
 	@ExceptionHandler(InvalidInfo.class)
-	public ResponseEntity<?> handleInvalidInfo(InvalidInfo e) {
-		return new ResponseEntity<>(e, HttpStatus.NOT_FOUND);
+	public ResponseEntity<ExceptionResponse> handleInvalidInfo(InvalidInfo e) {
+		ExceptionResponse exceptionResponse = new ExceptionResponse(e.getMessage(), new Date());
+		return new ResponseEntity<ExceptionResponse>(exceptionResponse, HttpStatus.NOT_FOUND);
 	}
 }

@@ -33,7 +33,7 @@ public class QuoteInfoDAOImpl implements QuoteInfoDAO {
 		return jdbcTemplate.queryForObject(SQL_READ,
 				(rs, rc) -> new QuoteInfo(rs.getInt("system_id"), rs.getString("member_county"),
 						rs.getString("entity_type"), rs.getString("first_name"), rs.getString("last_name"),
-						rs.getString("dob"), rs.getInt("ssn"), rs.getString("address1"), rs.getString("address2"),
+						rs.getDate("dob"), rs.getInt("ssn"), rs.getString("address1"), rs.getString("address2"),
 						rs.getString("county"), rs.getInt("primary_phone"), rs.getInt("secondary_phone"),
 						rs.getString("email_address"), rs.getString("quote_status"), rs.getString("lob_interested"),
 						rs.getString("premium_range")),

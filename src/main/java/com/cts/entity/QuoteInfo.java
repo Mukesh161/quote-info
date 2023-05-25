@@ -1,5 +1,7 @@
 package com.cts.entity;
 
+import java.util.Date;
+
 public class QuoteInfo {
 
 	private int systemId;
@@ -7,7 +9,7 @@ public class QuoteInfo {
 	private String entityType;
 	private String firstName;
 	private String lastName;
-	private String dob;
+	private Date dob;
 	private int ssn;
 	private String address1;
 	private String address2;
@@ -30,7 +32,7 @@ public class QuoteInfo {
 	}
 
 	public QuoteInfo(int systemId, String memberCounty, String entityType, String firstName, String lastName,
-			String dob, int ssn, String address1, String address2, String county, int primaryPhone, int secondaryPhone,
+			Date dob, int ssn, String address1, String address2, String county, int primaryPhone, int secondaryPhone,
 			String emailAddress, String quoteStatus, String lobInterested, String premiumRange) {
 		super();
 		this.systemId = systemId;
@@ -51,7 +53,7 @@ public class QuoteInfo {
 		this.premiumRange = premiumRange;
 	}
 
-	public QuoteInfo(String memberCounty, String entityType, String firstName, String lastName, String dob, int ssn,
+	public QuoteInfo(String memberCounty, String entityType, String firstName, String lastName, Date dob, int ssn,
 			String address1, String address2, String county, int primaryPhone, int secondaryPhone, String emailAddress,
 			String quoteStatus, String lobInterested, String premiumRange) {
 		super();
@@ -112,11 +114,11 @@ public class QuoteInfo {
 		this.lastName = lastName;
 	}
 
-	public String getDob() {
+	public Date getDob() {
 		return dob;
 	}
 
-	public void setDob(String dob) {
+	public void setDob(Date dob) {
 		this.dob = dob;
 	}
 
