@@ -30,7 +30,13 @@ public class QuoteInfoController {
 
 	@PostMapping("/submitUW")
 	public ResponseEntity<String> create(@RequestBody QuoteInfo quoteInfo) throws InvalidInfo {
-		if (! Stream.of(quoteInfo.getMemberCounty()).allMatch(Objects::isNull)) {
+		if (!Stream.of(quoteInfo.getMemberCounty(), quoteInfo.getEntityType(), quoteInfo.getFirstName(),
+				quoteInfo.getLastName(), quoteInfo.getDob(), (quoteInfo.getSsn() == 0) ? null : quoteInfo.getSsn(),
+				quoteInfo.getAddress1(), quoteInfo.getAddress2(), quoteInfo.getCounty(),
+				(quoteInfo.getPrimaryPhone() == 0) ? null : quoteInfo.getPrimaryPhone(),
+				(quoteInfo.getSecondaryPhone() == 0) ? null : quoteInfo.getSecondaryPhone(),
+				quoteInfo.getEmailAddress(), quoteInfo.getQuoteStatus(), quoteInfo.getLobInterested(),
+				quoteInfo.getPremiumRange()).anyMatch((Objects::isNull))) {
 			try {
 				quoteInfoService.create(quoteInfo);
 				return new ResponseEntity<String>("Quote created", HttpStatus.OK);
